@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Học từ vựng tiếng Thái</title>
+<style>
+:root{--bg:#f6f4ef;--fg:#1d1d1f;--card:#fff;--mut:#6b6b73;--acc:#c2410c;--acc2:#fde7d9;--ok:#15803d;--bad:#b91c1c;--bd:#e2ded6}
+@media(prefers-color-scheme:dark){:root{--bg:#161616;--fg:#f0eee9;--card:#232323;--mut:#a0a0a8;--acc:#fb923c;--acc2:#3a2a1e;--ok:#4ade80;--bad:#f87171;--bd:#3a3a3a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,'Segoe UI',Roboto,sans-serif}
+.th{font-family:'Noto Sans Thai','Sarabun','Leelawadee UI','Thonburi',Tahoma,sans-serif;line-height:1.7}
+header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--bd);background:var(--card)}
+header h1{font-size:18px;margin:0 auto 0 0}
+select,input,textarea,button{font:inherit;color:inherit}
+select,input[type=text],input:not([type]),textarea{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:6px 8px;max-width:100%}
+button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--acc)}
+button.sm{padding:4px 10px;font-size:14px}
+button.good{background:var(--ok);color:#fff;border-color:var(--ok)}
+button.bad{background:var(--bad);color:#fff;border-color:var(--bad)}
+button.ico{border:0;background:transparent;font-size:20px;padding:4px 8px}
+#tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px}
+#tabs button{white-space:nowrap}
+#tabs button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+main{max-width:820px;margin:0 auto;padding:8px 16px 60px}
+.stat{font-size:14px;color:var(--mut)}
+.empty,.mut{color:var(--mut)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:8px 0;font-size:14px;color:var(--mut)}
+.fcard{position:relative;background:var(--card);border:2px solid var(--bd);border-radius:20px;min-height:300px;padding:28px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;user-select:none}
+.fcard.known{border-color:var(--ok)}
+.fcard .say{position:absolute;top:8px;right:8px}
+.fcard .hint{position:absolute;bottom:8px;font-size:12px;color:var(--mut)}
+.huge{font-size:clamp(36px,9vw,64px)}
+.big{font-size:clamp(22px,5vw,32px);font-weight:600}
+.rom{color:var(--acc);font-size:18px}
+.ex{margin-top:14px;padding:10px 14px;background:var(--acc2);border-radius:12px;font-size:18px}
+.ex small{font-size:14px;color:var(--mut)}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.opts{display:grid;gap:10px;margin:16px 0}
+.opt{text-align:left;padding:12px 16px;font-size:18px}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.no{background:var(--bad);color:#fff;border-color:var(--bad)}
+.q{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:22px;text-align:center}
+.prog{height:6px;background:var(--bd);border-radius:6px;overflow:hidden;margin:6px 0}
+.prog i{display:block;height:100%;background:var(--acc)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.item{display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--bd)}
+.item .m{flex:1}
+.item .t{font-size:20px}
+.item.k .t::after{content:" ✓";color:var(--ok);font-size:14px}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+.tile{min-width:56px;padding:6px 10px;background:var(--card);border:1px solid var(--bd);border-radius:12px;font-size:34px;text-align:center;cursor:pointer}
+.tile small{display:block;font:12px system-ui;color:var(--mut)}
+.pad{position:relative;height:240px;background:var(--card);border:2px dashed var(--bd);border-radius:16px;overflow:hidden}
+.ghost{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--fg);opacity:.14;pointer-events:none;white-space:nowrap}
+.pad canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+dialog{width:min(640px,94vw);max-height:90vh;background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:16px;padding:16px}
+dialog::backdrop{background:#0008}
+dialog h3{margin:18px 0 4px;font-size:16px}
+dialog input,dialog textarea{width:100%;margin:4px 0}
+.mh{display:flex;justify-content:space-between;align-items:center}
+.plug{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#222;color:#fff;padding:8px 16px;border-radius:20px;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw}
+#toast.on{opacity:1}
+.err{color:var(--bad)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🇹🇭 Học từ vựng tiếng Thái</h1>
+  <select id="scope" title="Phạm vi ôn tập"></select>
+  <select id="rate" title="Tốc độ đọc"><option value="0.6">🐢 Chậm</option><option value="0.85">🙂 Vừa</option><option value="1.05">🐇 Nhanh</option></select>
+  <span class="stat" id="stat"></span>
+  <button id="mgr" class="sm">⚙️ Thêm / Quản lý</button>
+</header>
+<nav id="tabs"></nav>
+<main id="view"></main>
+<dialog id="dlg"></dialog>
+<div id="toast"></div>
+
+<script>
+/* ===== DỮ LIỆU GỐC (tạo từ Book1.xlsx) ===== */
+const BASE = [{"id":"b1","th":"ต่างประเทศ","rom":"","vi":"nước ngoài","ex":"เขาจะไปเที่ยวต่างประเทศปีหน้า","exv":"Anh ấy sẽ đi du lịch nước ngoài năm sau","g":"Từ 1–20"},{"id":"b2","th":"สนุก","rom":"","vi":"vui vẻ","ex":"เมื่อวานเราไปเที่ยวทะเลสนุกมาก","exv":"Hôm qua chúng tôi đi biển rất vui","g":"Từ 1–20"},{"id":"b3","th":"จริงเหรอ","rom":"jing rỏo","vi":"thật thế à?","ex":"เธอสอบผ่านแล้วจริงเหรอ?","exv":"Cậu thi đỗ rồi thật à?","g":"Từ 1–20"},{"id":"b4","th":"กลับมา","rom":"","vi":"trở về","ex":"แม่กลับมาจากทำงานแล้ว","exv":"Mẹ đã đi làm về rồi","g":"Từ 1–20"},{"id":"b5","th":"ของฝาก","rom":"","vi":"quà (khi đi xa trở về)","ex":"ฉันซื้อของฝากมาจากเชียงใหม่","exv":"Tôi mua quà từ Chiang Mai về","g":"Từ 1–20"},{"id":"b6","th":"ให้","rom":"","vi":"cho","ex":"เขาให้หนังสือเล่มนี้กับฉัน","exv":"Anh ấy cho tôi cuốn sách này","g":"Từ 1–20"},{"id":"b7","th":"กระเป๋า","rom":"krạ pảu","vi":"túi xách","ex":"กระเป๋าใบนี้น่ารักมาก","exv":"Cái túi này rất dễ thương","g":"Từ 1–20"},{"id":"b8","th":"กระโปรง","rom":"krạ prôông","vi":"váy","ex":"เธอใส่กระโปรงสีแดง","exv":"Cô ấy mặc váy màu đỏ","g":"Từ 1–20"},{"id":"b9","th":"รองเท้า","rom":"","vi":"giày","ex":"รองเท้าคู่นี้ราคาเท่าไหร่?","exv":"Đôi giày này giá bao nhiêu?","g":"Từ 1–20"},{"id":"b10","th":"ยี่ห้อ","rom":"","vi":"nhãn hiệu","ex":"คุณชอบยี่ห้ออะไร?","exv":"Bạn thích nhãn hiệu nào?","g":"Từ 1–20"},{"id":"b11","th":"ใช้","rom":"","vi":"dùng","ex":"ฉันใช้โทรศัพท์นี้มาสองปีแล้ว","exv":"Tôi dùng điện thoại này được 2 năm rồi","g":"Từ 1–20"},{"id":"b12","th":"ชอบ","rom":"","vi":"thích","ex":"ฉันชอบกินส้มตำ","exv":"Tôi thích ăn nộm đu đủ","g":"Từ 1–20"},{"id":"b13","th":"ขอบใจ","rom":"","vi":"cảm ơn (dùng cho ngang hàng/bạn bè)","ex":"ขอบใจสำหรับของขวัญนะ","exv":"Cảm ơn vì món quà nhé","g":"Từ 1–20"},{"id":"b14","th":"ส่วน","rom":"","vi":"còn, về phần","ex":"ส่วนฉัน ฉันจะอยู่บ้าน","exv":"Còn tôi, tôi sẽ ở nhà","g":"Từ 1–20"},{"id":"b15","th":"ใบ","rom":"bay","vi":"cái (dùng cho túi, mũ, lá...)","ex":"ฉันมีหมวก 1 ใบ","exv":"Tôi có 1 cái mũ","g":"Từ 1–20"},{"id":"b16","th":"ตัว","rom":"tua","vi":"cái (dùng cho quần áo, động vật)","ex":"เขาซื้อเสื้อ 2 ตัว","exv":"Anh ấy mua 2 cái áo","g":"Từ 1–20"},{"id":"b17","th":"คู่","rom":"khuu^","vi":"đôi","ex":"รองเท้า 1 คู่","exv":"1 đôi giày","g":"Từ 1–20"},{"id":"b18","th":"ชุด","rom":"","vi":"bộ","ex":"เขาใส่ชุดนอนสีฟ้า","exv":"Anh ấy mặc bộ đồ ngủ màu xanh","g":"Từ 1–20"},{"id":"b19","th":"เส้น","rom":"sêên^","vi":"cái, dây, sợi","ex":"ก๋วยเตี๋ยว 1 เส้น","exv":"1 sợi mì","g":"Từ 1–20"},{"id":"b20","th":"ก้อน","rom":"","vi":"cục, miếng","ex":"น้ำแข็ง 1 ก้อน","exv":"1 cục đá","g":"Từ 1–20"},{"id":"b21","th":"หลอด","rom":"loọt","vi":"ống, tuýp","ex":"ยาสีฟัน 1 หลอด","exv":"1 tuýp kem đánh răng","g":"Từ 21–40"},{"id":"b22","th":"กล่อง","rom":"","vi":"hộp","ex":"เขาซื้อนม 1 กล่อง","exv":"Anh ấy mua 1 hộp sữa","g":"Từ 21–40"},{"id":"b23","th":"วง","rom":"","vi":"cái (dùng cho nhẫn)","ex":"แหวน 1 วง","exv":"1 chiếc nhẫn","g":"Từ 21–40"},{"id":"b24","th":"ผืน","rom":"","vi":"tấm (dùng cho khăn, vải)","ex":"ผ้าเช็ดตัว 1 ผืน","exv":"1 cái khăn tắm","g":"Từ 21–40"},{"id":"b25","th":"หมวก","rom":"muộc","vi":"mũ","ex":"วันนี้อากาศร้อน ต้องใส่หมวก","exv":"Hôm nay trời nóng, phải đội mũ","g":"Từ 21–40"},{"id":"b26","th":"เสื้อ","rom":"xưa^","vi":"áo","ex":"เสื้อตัวนี้สีอะไร?","exv":"Cái áo này màu gì?","g":"Từ 21–40"},{"id":"b27","th":"เสื้อเชิ้ต","rom":"","vi":"áo sơ mi","ex":"พ่อใส่เสื้อเชิ้ตไปทำงาน","exv":"Bố mặc áo sơ mi đi làm","g":"Từ 21–40"},{"id":"b28","th":"เสื้อยืด","rom":"","vi":"áo phông","ex":"นักเรียนชอบใส่เสื้อยืด","exv":"Học sinh thích mặc áo phông","g":"Từ 21–40"},{"id":"b29","th":"เสื้อกันหนาว","rom":"","vi":"áo rét","ex":"หน้าหนาวต้องใส่เสื้อกันหนาว","exv":"Mùa đông phải mặc áo rét","g":"Từ 21–40"},{"id":"b30","th":"เสื้อกันแดด","rom":"","vi":"áo chống nắng","ex":"แดดร้อนมาก ใส่เสื้อกันแดดด้วย","exv":"Nắng nóng lắm, mặc áo chống nắng vào","g":"Từ 21–40"},{"id":"b31","th":"เสื้อกันฝน","rom":"","vi":"áo mưa","ex":"ฝนตกแล้ว เอาเสื้อกันฝนไปด้วย","exv":"Mưa rồi, mang áo mưa đi nhé","g":"Từ 21–40"},{"id":"b32","th":"กางเกง","rom":"","vi":"quần","ex":"กางเกงยีนส์ตัวนี้สวยมาก","exv":"Cái quần bò này đẹp lắm","g":"Từ 21–40"},{"id":"b33","th":"กางเกงขาสั้น / กางเกงขายาว","rom":"","vi":"quần sooc / quần dài","ex":"ฉันชอบใส่กางเกงขาสั้นในฤดูร้อน","exv":"Tôi thích mặc quần sooc vào mùa hè","g":"Từ 21–40"},{"id":"b34","th":"ชุดนอน","rom":"","vi":"bộ đồ ngủ","ex":"เด็กๆ ใส่ชุดนอนเข้านอน","exv":"Bọn trẻ mặc đồ ngủ đi ngủ","g":"Từ 21–40"},{"id":"b35","th":"ชุดชั้นใน","rom":"","vi":"bộ đồ lót","ex":"ชุดชั้นในเป็นของใช้ส่วนตัว","exv":"Đồ lót là đồ dùng cá nhân","g":"Từ 21–40"},{"id":"b36","th":"เสื้อกล้าม","rom":"","vi":"áo lót (ba lỗ)","ex":"ผู้ชายใส่เสื้อกล้ามออกกำลังกาย","exv":"Đàn ông mặc áo ba lỗ tập thể dục","g":"Từ 21–40"},{"id":"b37","th":"กางเกงใน","rom":"","vi":"quần lót","ex":"","exv":"","g":"Từ 21–40"},{"id":"b38","th":"รองเท้าแตะ","rom":"","vi":"dép lê","ex":"อยู่บ้านใส่รองเท้าแตะ","exv":"Ở nhà đi dép lê","g":"Từ 21–40"},{"id":"b39","th":"ถุงเท้า","rom":"","vi":"tất (vớ)","ex":"ถุงเท้าคู่นี้สีดำ","exv":"Đôi tất này màu đen","g":"Từ 21–40"},{"id":"b40","th":"ถุงมือ","rom":"","vi":"găng tay","ex":"หน้าหนาวต้องใส่ถุงมือ","exv":"Mùa đông phải đeo găng tay","g":"Từ 21–40"},{"id":"b41","th":"แว่นตา","rom":"","vi":"kính","ex":"คุณยายใส่แว่นตาอ่านหนังสือ","exv":"Bà đeo kính đọc sách","g":"Từ 41–60"},{"id":"b42","th":"นาฬิกาข้อมือ","rom":"","vi":"đồng hồ đeo tay","ex":"นาฬิกาข้อมือเรือนนี้แพงมาก","exv":"Cái đồng hồ đeo tay này đắt lắm","g":"Từ 41–60"},{"id":"b43","th":"ต่างหู","rom":"","vi":"hoa tai","ex":"เธอใส่ต่างหูสีทอง","exv":"Cô ấy đeo hoa tai màu vàng","g":"Từ 41–60"},{"id":"b44","th":"แหวน","rom":"","vi":"nhẫn","ex":"แหวนแต่งงาน","exv":"Nhẫn cưới","g":"Từ 41–60"},{"id":"b45","th":"สร้อย","rom":"","vi":"dây chuyền","ex":"สร้อยคอเส้นนี้สวยจัง","exv":"Sợi dây chuyền này đẹp thật","g":"Từ 41–60"},{"id":"b46","th":"ผ้าพันคอ","rom":"","vi":"khăn quàng cổ","ex":"ใส่ผ้าพันคอเพื่อความอบอุ่น","exv":"Đeo khăn quàng cổ để giữ ấm","g":"Từ 41–60"},{"id":"b47","th":"เข็มขัด","rom":"","vi":"thắt lưng","ex":"เข็มขัดเส้นนี้ทำจากหนัง","exv":"Cái thắt lưng này làm bằng da","g":"Từ 41–60"},{"id":"b48","th":"แปรงสีฟัน","rom":"","vi":"bàn chải đánh răng","ex":"ฉันเปลี่ยนแปรงสีฟันอันใหม่","exv":"Tôi đổi bàn chải đánh răng mới","g":"Từ 41–60"},{"id":"b49","th":"ยาสีฟัน","rom":"","vi":"thuốc đánh răng","ex":"ซื้อยาสีฟัน 1 หลอด","exv":"Mua 1 tuýp kem đánh răng","g":"Từ 41–60"},{"id":"b50","th":"สบู่","rom":"","vi":"xà phòng (bánh)","ex":"ล้างมือด้วยสบู่","exv":"Rửa tay bằng xà phòng","g":"Từ 41–60"},{"id":"b51","th":"ยาสระผม","rom":"","vi":"dầu gội đầu","ex":"ฉันต้องซื้อยาสระผมใหม่","exv":"Tôi phải mua dầu gội đầu mới","g":"Từ 41–60"},{"id":"b52","th":"แป้ง","rom":"","vi":"phấn","ex":"ทาแป้งหลังอาบน้ำ","exv":"Thoa phấn sau khi tắm","g":"Từ 41–60"},{"id":"b53","th":"หวี","rom":"","vi":"lược","ex":"ใช้หวีหวีผม","exv":"Dùng lược chải tóc","g":"Từ 41–60"},{"id":"b54","th":"กระจก","rom":"","vi":"gương","ex":"ส่องกระจกก่อนออกจากบ้าน","exv":"Soi gương trước khi ra khỏi nhà","g":"Từ 41–60"},{"id":"b55","th":"ผงซักฟอก","rom":"","vi":"xà phòng giặt (bột giặt)","ex":"ซักผ้าด้วยผงซักฟอก","exv":"Giặt quần áo bằng bột giặt","g":"Từ 41–60"},{"id":"b56","th":"ผ้าเช็ดตัว / ผ้าเช็ดหน้า","rom":"","vi":"khăn lau người / khăn mặt","ex":"ใช้ผ้าเช็ดตัวเช็ดผม","exv":"Dùng khăn tắm lau tóc","g":"Từ 41–60"},{"id":"b57","th":"เครื่องสำอาง","rom":"","vi":"mỹ phẩm","ex":"ผู้หญิงชอบซื้อเครื่องสำอาง","exv":"Phụ nữ thích mua mỹ phẩm","g":"Từ 41–60"},{"id":"b58","th":"ร่ม","rom":"","vi":"ô (dù)","ex":"พกร่มไปด้วยเพราะฝนอาจจะตก","exv":"Mang ô đi vì có thể mưa","g":"Từ 41–60"},{"id":"b59","th":"โทรศัพท์/มือถือ","rom":"","vi":"điện thoại/điện thoại di động","ex":"มือถือของฉันแบตหมด","exv":"Điện thoại của tôi hết pin","g":"Từ 41–60"},{"id":"b60","th":"เช่า","rom":"","vi":"thuê","ex":"เราจะเช่าบ้านหลังนี้","exv":"Chúng tôi sẽ thuê ngôi nhà này","g":"Từ 41–60"},{"id":"b61","th":"เชิญ","rom":"","vi":"xin mời","ex":"เชิญนั่งครับ","exv":"Xin mời ngồi","g":"Từ 61–80"},{"id":"b62","th":"เข้าบ้าน","rom":"","vi":"vào nhà","ex":"เชิญเข้าบ้านครับ","exv":"Mời vào nhà","g":"Từ 61–80"},{"id":"b63","th":"ชั้นล่าง","rom":"","vi":"tầng dưới","ex":"ห้องครัวอยู่ชั้นล่าง","exv":"Phòng bếp ở tầng dưới","g":"Từ 61–80"},{"id":"b64","th":"ชั้นบน","rom":"","vi":"tầng trên","ex":"ห้องนอนอยู่ชั้นบน","exv":"Phòng ngủ ở tầng trên","g":"Từ 61–80"},{"id":"b65","th":"ห้องรับแขก","rom":"","vi":"phòng khách","ex":"แม่กำลังดูทีวีในห้องรับแขก","exv":"Mẹ đang xem TV ở phòng khách","g":"Từ 61–80"},{"id":"b66","th":"ห้องครัว","rom":"","vi":"phòng bếp","ex":"แม่ทำอาหารในห้องครัว","exv":"Mẹ nấu ăn trong bếp","g":"Từ 61–80"},{"id":"b67","th":"ห้องน้ำ","rom":"","vi":"phòng tắm","ex":"ห้องน้ำอยู่ทางไหน?","exv":"Phòng tắm ở hướng nào?","g":"Từ 61–80"},{"id":"b68","th":"ห้องนอน","rom":"","vi":"phòng ngủ","ex":"ฉันนอนในห้องนอน","exv":"Tôi ngủ trong phòng ngủ","g":"Từ 61–80"},{"id":"b69","th":"ห้องทำงาน","rom":"","vi":"phòng làm việc","ex":"พ่อทำงานอยู่ในห้องทำงาน","exv":"Bố đang làm việc trong phòng làm việc","g":"Từ 61–80"},{"id":"b70","th":"เครื่องปรับอากาศ","rom":"","vi":"máy điều hòa","ex":"เปิดเครื่องปรับอากาศ","exv":"Bật điều hòa","g":"Từ 61–80"},{"id":"b71","th":"เครื่องทำน้ำอุ่น","rom":"","vi":"bình nóng lạnh","ex":"อาบน้ำด้วยเครื่องทำน้ำอุ่น","exv":"Tắm bằng bình nóng lạnh","g":"Từ 61–80"},{"id":"b72","th":"ครบ","rom":"","vi":"đủ","ex":"ของใช้ครบแล้ว","exv":"Đồ dùng đã đủ rồi","g":"Từ 61–80"},{"id":"b73","th":"ทุกอย่าง","rom":"","vi":"mọi thứ","ex":"ทุกอย่างพร้อมแล้ว","exv":"Mọi thứ đã sẵn sàng","g":"Từ 61–80"},{"id":"b74","th":"เตียงนอน","rom":"","vi":"giường ngủ","ex":"เตียงนอนนุ่มมาก","exv":"Giường ngủ rất êm","g":"Từ 61–80"},{"id":"b75","th":"ตู้","rom":"","vi":"tủ","ex":"เสื้อผ้าอยู่ในตู้","exv":"Quần áo ở trong tủ","g":"Từ 61–80"},{"id":"b76","th":"ใหญ่","rom":"","vi":"to, lớn","ex":"บ้านหลังนี้ใหญ่","exv":"Ngôi nhà này to","g":"Từ 61–80"},{"id":"b77","th":"เล็ก","rom":"","vi":"nhỏ","ex":"ห้องนี้เล็ก","exv":"Căn phòng này nhỏ","g":"Từ 61–80"},{"id":"b78","th":"ทราบ","rom":"","vi":"biết (lịch sự)","ex":"ทราบแล้วครับ","exv":"Đã biết rồi ạ","g":"Từ 61–80"},{"id":"b79","th":"พา","rom":"","vi":"dẫn, đưa","ex":"พาเพื่อนไปเที่ยว","exv":"Dẫn bạn đi chơi","g":"Từ 61–80"},{"id":"b80","th":"ของใช้","rom":"","vi":"đồ dùng","ex":"ของใช้ในบ้าน","exv":"Đồ dùng trong nhà","g":"Từ 61–80"},{"id":"b81","th":"ด้วยอะไร","rom":"","vi":"bằng gì","ex":"เขียนด้วยอะไร?","exv":"Viết bằng gì?","g":"Từ 81–100"},{"id":"b82","th":"เครื่อง","rom":"","vi":"cái (dùng cho máy móc)","ex":"เครื่องซักผ้า","exv":"Máy giặt","g":"Từ 81–100"},{"id":"b83","th":"เล่ม","rom":"","vi":"cái (dùng cho sách, dao)","ex":"หนังสือ 1 เล่ม","exv":"1 quyển sách","g":"Từ 81–100"},{"id":"b84","th":"หลัง","rom":"","vi":"ngôi (ngôi nhà)","ex":"บ้าน 1 หลัง","exv":"1 ngôi nhà","g":"Từ 81–100"},{"id":"b85","th":"เตาแก๊ส","rom":"","vi":"bếp ga","ex":"แม่ทำอาหารบนเตาแก๊ส","exv":"Mẹ nấu ăn trên bếp ga","g":"Từ 81–100"},{"id":"b86","th":"กระทะ","rom":"","vi":"chảo","ex":"ทอดไข่ในกระทะ","exv":"Rán trứng trong chảo","g":"Từ 81–100"},{"id":"b87","th":"ตะหลิว","rom":"","vi":"muôi đảo (xào)","ex":"ใช้ตะหลิวผัดอาหาร","exv":"Dùng muôi đảo xào thức ăn","g":"Từ 81–100"},{"id":"b88","th":"หม้อ","rom":"","vi":"nồi","ex":"ต้มน้ำในหม้อ","exv":"Đun nước trong nồi","g":"Từ 81–100"},{"id":"b89","th":"ทัพพี","rom":"","vi":"muôi (múc canh)","ex":"ตักแกงด้วยทัพพี","exv":"Múc canh bằng muôi","g":"Từ 81–100"},{"id":"b90","th":"จาน","rom":"","vi":"đĩa","ex":"อาหารอยู่บนจาน","exv":"Thức ăn ở trên đĩa","g":"Từ 81–100"},{"id":"b91","th":"ชาม","rom":"","vi":"bát tô","ex":"กินก๋วยเตี๋ยวในชาม","exv":"Ăn phở trong bát tô","g":"Từ 81–100"},{"id":"b92","th":"ถ้วย","rom":"","vi":"bát con","ex":"ดื่มน้ำจากถ้วย","exv":"Uống nước từ bát con","g":"Từ 81–100"},{"id":"b93","th":"แก้ว","rom":"","vi":"cốc","ex":"แก้วน้ำนี้สวย","exv":"Cái cốc này đẹp","g":"Từ 81–100"},{"id":"b94","th":"ตะเกียบ","rom":"","vi":"đũa","ex":"คนจีนใช้ตะเกียบกินข้าว","exv":"Người Trung Quốc dùng đũa ăn cơm","g":"Từ 81–100"},{"id":"b95","th":"ช้อน","rom":"","vi":"thìa","ex":"กินข้าวด้วยช้อน","exv":"Ăn cơm bằng thìa","g":"Từ 81–100"},{"id":"b96","th":"ส้อม","rom":"","vi":"dĩa (nĩa)","ex":"ใช้ส้อมและมีด","exv":"Dùng dĩa và dao","g":"Từ 81–100"},{"id":"b97","th":"มีด","rom":"","vi":"dao","ex":"มีดเล่มนี้คมมาก","exv":"Con dao này sắc lắm","g":"Từ 81–100"},{"id":"b98","th":"กรรไกร","rom":"","vi":"kéo","ex":"ตัดกระดาษด้วยกรรไกร","exv":"Cắt giấy bằng kéo","g":"Từ 81–100"},{"id":"b99","th":"เขียง","rom":"","vi":"thớt","ex":"สับหมูบนเขียง","exv":"Băm thịt lợn trên thớt","g":"Từ 81–100"},{"id":"b100","th":"ตะกร้า","rom":"","vi":"rổ, rá, giỏ","ex":"ล้างผักในตะกร้า","exv":"Rửa rau trong rổ","g":"Từ 81–100"},{"id":"b101","th":"ปิ่นโต","rom":"","vi":"cặp lồng","ex":"ใส่อาหารในปิ่นโต","exv":"Đựng thức ăn vào cặp lồng","g":"Từ 101–120"},{"id":"b102","th":"ไม้กวาด","rom":"","vi":"chổi","ex":"กวาดบ้านด้วยไม้กวาด","exv":"Quét nhà bằng chổi","g":"Từ 101–120"},{"id":"b103","th":"ผ้าขี้ริ้ว","rom":"","vi":"giẻ lau, khăn lau","ex":"เช็ดโต๊ะด้วยผ้าขี้ริ้ว","exv":"Lau bàn bằng giẻ lau","g":"Từ 101–120"},{"id":"b104","th":"ผ้าเช็ดมือ","rom":"","vi":"khăn lau tay","ex":"ล้างมือแล้วเช็ดด้วยผ้าเช็ดมือ","exv":"Rửa tay rồi lau bằng khăn lau tay","g":"Từ 101–120"},{"id":"b105","th":"เฟอร์นิเจอร์","rom":"","vi":"nội thất","ex":"บ้านนี้มีเฟอร์นิเจอร์สวยๆ","exv":"Ngôi nhà này có nội thất đẹp","g":"Từ 101–120"},{"id":"b106","th":"โต๊ะ","rom":"","vi":"bàn","ex":"หนังสืออยู่บนโต๊ะ","exv":"Sách ở trên bàn","g":"Từ 101–120"},{"id":"b107","th":"เก้าอี้","rom":"","vi":"ghế","ex":"นั่งบนเก้าอี้","exv":"Ngồi trên ghế","g":"Từ 101–120"},{"id":"b108","th":"ชั้นวางหนังสือ","rom":"","vi":"giá sách","ex":"วางหนังสือบนชั้นวางหนังสือ","exv":"Đặt sách lên giá sách","g":"Từ 101–120"},{"id":"b109","th":"โซฟา","rom":"","vi":"sô pha","ex":"นั่งดูทีวีบนโซฟา","exv":"Ngồi xem TV trên sô pha","g":"Từ 101–120"},{"id":"b110","th":"หมอน","rom":"","vi":"gối","ex":"หนุนหมอนนอนหลับ","exv":"Gối đầu ngủ","g":"Từ 101–120"},{"id":"b111","th":"ที่นอน (ฟูก)","rom":"","vi":"đệm","ex":"ที่นอนนุ่มมาก","exv":"Đệm rất êm","g":"Từ 101–120"},{"id":"b112","th":"ผ้าปูที่นอน","rom":"","vi":"ga trải giường","ex":"เปลี่ยนผ้าปูที่นอนใหม่","exv":"Thay ga trải giường mới","g":"Từ 101–120"},{"id":"b113","th":"ผ้าห่ม","rom":"","vi":"chăn","ex":"หนาวมากต้องห่มผ้าห่ม","exv":"Lạnh lắm phải đắp chăn","g":"Từ 101–120"},{"id":"b114","th":"ผ้านวม","rom":"","vi":"chăn bông","ex":"ฤดูหนาวใช้ผ้านวม","exv":"Mùa đông dùng chăn bông","g":"Từ 101–120"},{"id":"b115","th":"มุ้ง","rom":"","vi":"màn","ex":"กางมุ้งก่อนนอน","exv":"Giăng màn trước khi ngủ","g":"Từ 101–120"},{"id":"b116","th":"วิทยุ","rom":"","vi":"đài","ex":"ฟังวิทยุ","exv":"Nghe đài","g":"Từ 101–120"},{"id":"b117","th":"โทรทัศน์","rom":"","vi":"ti vi","ex":"ดูโทรทัศน์","exv":"Xem ti vi","g":"Từ 101–120"},{"id":"b118","th":"พัดลม","rom":"","vi":"quạt","ex":"เปิดพัดลมเพราะร้อน","exv":"Bật quạt vì nóng","g":"Từ 101–120"},{"id":"b119","th":"คอมพิวเตอร์","rom":"","vi":"máy vi tính","ex":"เล่นคอมพิวเตอร์","exv":"Chơi máy tính","g":"Từ 101–120"},{"id":"b120","th":"หม้อหุงข้าวไฟฟ้า","rom":"","vi":"nồi cơm điện","ex":"หุงข้าวด้วยหม้อหุงข้าวไฟฟ้า","exv":"Nấu cơm bằng nồi cơm điện","g":"Từ 101–120"},{"id":"b121","th":"เตารีด","rom":"","vi":"bàn là","ex":"รีดผ้าด้วยเตารีด","exv":"Là quần áo bằng bàn là","g":"Từ 121–132"},{"id":"b122","th":"เครื่องดูดฝุ่น","rom":"","vi":"máy hút bụi","ex":"ทำความสะอาดบ้านด้วยเครื่องดูดฝุ่น","exv":"Dọn nhà bằng máy hút bụi","g":"Từ 121–132"},{"id":"b123","th":"ไมโครเวฟ","rom":"","vi":"lò vi sóng","ex":"อุ่นอาหารในไมโครเวฟ","exv":"Hâm nóng thức ăn trong lò vi sóng","g":"Từ 121–132"},{"id":"b124","th":"เครื่องเป่าผม","rom":"","vi":"máy sấy tóc","ex":"เป่าผมด้วยเครื่องเป่าผม","exv":"Sấy tóc bằng máy sấy tóc","g":"Từ 121–132"},{"id":"b125","th":"เครื่องซักผ้า","rom":"","vi":"máy giặt","ex":"ซักผ้าด้วยเครื่องซักผ้า","exv":"Giặt quần áo bằng máy giặt","g":"Từ 121–132"},{"id":"b126","th":"ตู้เย็น","rom":"","vi":"tủ lạnh","ex":"เก็บอาหารไว้ในตู้เย็น","exv":"Bảo quản thức ăn trong tủ lạnh","g":"Từ 121–132"},{"id":"b127","th":"เครื่องครัว","rom":"","vi":"Đồ dùng nhà bếp","ex":"ฉันซื้อเครื่องครัวใหม่สำหรับทำอาหาร","exv":"Tôi mua đồ dùng nhà bếp mới để nấu ăn","g":"Từ 121–132"},{"id":"b128","th":"เครื่องเรือน","rom":"","vi":"Đồ nội thất (trong nhà)","ex":"บ้านหลังนี้มีเครื่องเรือนครบทุกอย่าง","exv":"Ngôi nhà này có đầy đủ đồ nội thất","g":"Từ 121–132"},{"id":"b129","th":"เครื่องนอน","rom":"","vi":"Đồ dùng trên giường (chăn, gối, đệm...)","ex":"ร้านนี้ขายเครื่องนอนราคาถูก","exv":"Cửa hàng này bán đồ dùng trên giường giá rẻ","g":"Từ 121–132"},{"id":"b130","th":"เครื่องใช้ไฟฟ้า","rom":"","vi":"Đồ điện, thiết bị điện","ex":"อย่าลืมปิดเครื่องใช้ไฟฟ้าเมื่อออกจากบ้าน","exv":"Đừng quên tắt các thiết bị điện khi ra khỏi nhà","g":"Từ 121–132"},{"id":"b131","th":"เครื่องแต่งกาย","rom":"","vi":"Trang phục, quần áo","ex":"ร้านนี้มีเครื่องแต่งกายสวยๆ เยอะแยะ","exv":"Cửa hàng này có nhiều trang phục đẹp","g":"Từ 121–132"},{"id":"b132","th":"ของใช้","rom":"","vi":"Đồ dùng (nói chung)","ex":"ของใช้ในห้องน้ำอยู่ที่ไหน?","exv":"Đồ dùng trong phòng tắm ở đâu?","g":"Từ 121–132"}];
+
+/* ===== LÕI ỨNG DỤNG ===== */
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('thai_' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem('thai_' + k, JSON.stringify(v)); } catch (e) {} }
+};
+let extra = store.get('extra', []), plugins = store.get('plugins', []), known = store.get('known', {});
+let scope = store.get('scope', 'all'), cur = store.get('tab', 'flash'), rate = store.get('rate', 0.85), ready = false;
+const modules = [];
+
+const all = () => BASE.concat(extra);
+const groups = () => [...new Set(all().map(w => w.g))];
+const words = () => { const a = all(); if (scope === 'unknown') return a.filter(w => !known[w.id]); if (scope === 'all') return a; return a.filter(w => w.g === scope); };
+const isKnown = id => !!known[id];
+const setKnown = (id, v) => { if (v) known[id] = 1; else delete known[id]; store.set('known', known); stat(); };
+
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('on'), 2600); }
+
+/* Âm thanh: Web Speech API (giọng th-TH của thiết bị) */
+let voices = [], warned = false;
+if ('speechSynthesis' in window) { const lv = () => voices = speechSynthesis.getVoices(); lv(); speechSynthesis.onvoiceschanged = lv; }
+function speak(text) {
+  if (!('speechSynthesis' in window)) return toast('Trình duyệt không hỗ trợ phát âm');
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text); u.lang = 'th-TH'; u.rate = rate;
+  const v = voices.find(v => /^th/i.test(v.lang));
+  if (v) u.voice = v; else if (voices.length && !warned) { warned = true; toast('Máy chưa có giọng tiếng Thái – hãy cài trong Cài đặt > Ngôn ngữ/Giọng nói'); }
+  speechSynthesis.speak(u);
+}
+
+function registerModule(m) {
+  const i = modules.findIndex(x => x.id === m.id);
+  if (i >= 0) modules[i] = m; else modules.push(m);
+  if (ready) drawTabs();
+}
+const api = { registerModule, words, all, groups, speak, store, shuffle, esc, toast, known: isKnown, setKnown, refresh: () => show(), $ };
+window.ThaiApp = api;
+
+function stat() { const a = all(); $('#stat').textContent = `Đã thuộc ${a.filter(w => known[w.id]).length}/${a.length}`; }
+function drawScope() {
+  const o = [['all', 'Tất cả từ'], ['unknown', 'Chưa thuộc'], ...groups().map(g => [g, g])];
+  if (!o.some(x => x[0] === scope)) scope = 'all';
+  $('#scope').innerHTML = o.map(([v, t]) => `<option value="${esc(v)}" ${v === scope ? 'selected' : ''}>${esc(t)}</option>`).join('');
+}
+function drawTabs() { $('#tabs').innerHTML = modules.map(m => `<button data-id="${esc(m.id)}" class="${m.id === cur ? 'on' : ''}">${esc(m.icon || '•')} ${esc(m.title)}</button>`).join(''); }
+function show() {
+  window.__key = null; window.speechSynthesis && speechSynthesis.cancel();
+  if (!modules.find(m => m.id === cur)) cur = modules[0].id;
+  drawTabs(); const v = $('#view'); v.innerHTML = '';
+  try { modules.find(m => m.id === cur).render(v, api); } catch (e) { v.innerHTML = '<p class="err">Lỗi module: ' + esc(e.message) + '</p>'; }
+}
+$('#tabs').onclick = e => { const b = e.target.closest('button'); if (b) { cur = b.dataset.id; store.set('tab', cur); show(); } };
+$('#scope').onchange = e => { scope = e.target.value; store.set('scope', scope); show(); };
+$('#rate').onchange = e => { rate = +e.target.value; store.set('rate', rate); };
+document.addEventListener('click', e => { const b = e.target.closest('[data-say]'); if (b) { e.stopPropagation(); speak(b.dataset.say); } });
+document.addEventListener('keydown', e => { if (window.__key && !/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) window.__key(e); });
+
+/* ===== MODULE 1: FLASHCARD ===== */
+registerModule({ id: 'flash', title: 'Flashcard', icon: '🃏', render(el, A) {
+  let list = A.words();
+  if (!list.length) { el.innerHTML = '<p class="empty">Phạm vi này chưa có từ nào.</p>'; return; }
+  let i = 0, flip = false, rev = A.store.get('rev', false), auto = A.store.get('auto', false);
+  const talk = () => { if (auto && (rev ? flip : !flip)) A.speak(list[i].th); };
+  const go = d => { i = (i + d + list.length) % list.length; flip = false; draw(); talk(); };
+  const doFlip = () => { flip = !flip; draw(); talk(); };
+  function draw() {
+    const w = list[i];
+    const romH = w.rom ? `<div class="rom">${esc(w.rom)}</div>` : '';
+    const front = rev ? `<div class="big">${esc(w.vi)}</div>` : `<div class="th huge">${esc(w.th)}</div>${romH}`;
+    const exH = w.ex ? `<div class="ex"><span class="th">${esc(w.ex)}</span> <button class="ico" data-say="${esc(w.ex)}">🔊</button><br><small>${esc(w.exv)}</small></div>` : '';
+    const back = `<div class="th huge">${esc(w.th)}</div>${romH}<div class="big">${esc(w.vi)}</div>${exH}`;
+    el.innerHTML = `<div class="bar"><span>${i + 1}/${list.length}</span><label><input type="checkbox" id="auto" ${auto ? 'checked' : ''}> Tự phát âm</label><button class="sm" id="rev">⇄ ${rev ? 'Việt → Thái' : 'Thái → Việt'}</button></div>
+    <div class="fcard ${A.known(w.id) ? 'known' : ''}" id="fc">${flip ? back : front}<button class="ico say" data-say="${esc(w.th)}">🔊</button><div class="hint">${flip ? '' : 'Chạm để lật thẻ · phím ← → Space'}</div></div>
+    <div class="ctl"><button id="pv">◀</button><button class="bad" id="no">✗ Chưa thuộc</button><button class="good" id="yes">✓ Đã thuộc</button><button id="nx">▶</button><button id="sh">🔀 Trộn</button></div>`;
+    $('#fc', el).onclick = e => { if (!e.target.closest('[data-say]')) doFlip(); };
+    $('#pv', el).onclick = () => go(-1); $('#nx', el).onclick = () => go(1);
+    $('#yes', el).onclick = () => { A.setKnown(w.id, true); go(1); };
+    $('#no', el).onclick = () => { A.setKnown(w.id, false); go(1); };
+    $('#sh', el).onclick = () => { list = A.shuffle(list); i = 0; flip = false; draw(); };
+    $('#auto', el).onchange = e => { auto = e.target.checked; A.store.set('auto', auto); };
+    $('#rev', el).onclick = () => { rev = !rev; A.store.set('rev', rev); flip = false; draw(); };
+  }
+  window.__key = e => { if (e.key === 'ArrowRight') go(1); else if (e.key === 'ArrowLeft') go(-1); else if (e.key === ' ') { e.preventDefault(); doFlip(); } };
+  draw();
+} });
+
+/* ===== MODULE 2: TRẮC NGHIỆM ===== */
+registerModule({ id: 'quiz', title: 'Trắc nghiệm', icon: '📝', render(el, A) {
+  const list = A.words(), pool = A.all();
+  let mode = A.store.get('qmode', 't2v'), n = A.store.get('qn', 10);
+  function setup() {
+    el.innerHTML = `<div class="q" style="text-align:left"><h3 style="margin-top:0">Chọn kiểu bài</h3>
+    <div class="row"><select id="qm"><option value="t2v">Nhìn tiếng Thái → chọn nghĩa Việt</option><option value="v2t">Nhìn nghĩa Việt → chọn từ Thái</option><option value="l2v">Nghe phát âm → chọn nghĩa Việt</option></select>
+    <select id="qn"><option>5</option><option>10</option><option>20</option><option value="9999">Tất cả</option></select></div>
+    <p class="mut">Phạm vi: ${list.length} từ. Câu sai sẽ được chuyển về “Chưa thuộc”.</p><button class="good" id="go">Bắt đầu</button></div>`;
+    $('#qm', el).value = mode; $('#qn', el).value = String(n);
+    $('#go', el).onclick = () => { mode = $('#qm', el).value; n = +$('#qn', el).value; A.store.set('qmode', mode); A.store.set('qn', n); start(); };
+  }
+  function start() {
+    if (!list.length) { el.innerHTML = '<p class="empty">Phạm vi này chưa có từ nào.</p>'; return; }
+    const qs = A.shuffle(list).slice(0, n); let k = 0, score = 0; const wrong = [];
+    const key = mode === 'v2t' ? 'th' : 'vi';
+    function ask() {
+      if (k >= qs.length) return end();
+      const w = qs[k];
+      const ds = A.shuffle(pool.filter(x => x.id !== w.id && x[key] !== w[key])).slice(0, 3);
+      const opts = A.shuffle([w, ...ds]);
+      const prompt = mode === 't2v' ? `<div class="th huge">${esc(w.th)}</div><button class="ico" data-say="${esc(w.th)}">🔊</button>`
+        : mode === 'v2t' ? `<div class="big">${esc(w.vi)}</div>`
+        : `<button class="ico" style="font-size:56px" data-say="${esc(w.th)}">🔊</button><div class="mut">Nghe và chọn nghĩa đúng</div>`;
+      el.innerHTML = `<div class="bar"><span>Câu ${k + 1}/${qs.length}</span><span>Điểm: ${score}</span></div><div class="prog"><i style="width:${k / qs.length * 100}%"></i></div>
+      <div class="q">${prompt}</div><div class="opts">${opts.map((o, j) => `<button class="opt ${key === 'th' ? 'th' : ''}" data-j="${j}">${esc(o[key])}</button>`).join('')}</div><div class="ctl" id="nxw"></div>`;
+      if (mode === 'l2v') A.speak(w.th);
+      el.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+        const o = opts[+b.dataset.j], ok = o.id === w.id;
+        el.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (opts[+x.dataset.j].id === w.id) x.classList.add('ok'); });
+        if (ok) score++; else { b.classList.add('no'); wrong.push(w); A.setKnown(w.id, false); }
+        if (mode !== 'l2v') A.speak(w.th);
+        $('#nxw', el).innerHTML = `<div style="width:100%;text-align:center" class="th">${esc(w.th)} ${w.rom ? '· ' + esc(w.rom) : ''} = ${esc(w.vi)}</div><button class="good" id="nxt">${k + 1 >= qs.length ? 'Xem kết quả' : 'Tiếp →'}</button>`;
+        $('#nxt', el).onclick = () => { k++; ask(); };
+        window.__key = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); k++; ask(); } };
+      });
+    }
+    function end() {
+      window.__key = null; const p = Math.round(score / qs.length * 100);
+      el.innerHTML = `<div class="q"><div class="huge">${p >= 80 ? '🎉' : p >= 50 ? '👍' : '💪'} ${score}/${qs.length}</div><div class="big">${p}%</div></div>
+      ${wrong.length ? `<h3>Cần ôn lại (${wrong.length})</h3>` + wrong.map(w => `<div class="item"><div class="m"><div class="t th">${esc(w.th)}</div><div>${esc(w.vi)}</div></div><button class="ico" data-say="${esc(w.th)}">🔊</button></div>`).join('') : '<p>Hoàn hảo! Không sai câu nào.</p>'}
+      <div class="ctl"><button class="good" id="again">Làm lại</button><button id="cfg">Đổi kiểu bài</button></div>`;
+      $('#again', el).onclick = start; $('#cfg', el).onclick = setup;
+    }
+    ask();
+  }
+  setup();
+} });
+
+/* ===== MODULE 3: XEM NÉT CHỮ (phân tách ký tự + bảng tập viết) ===== */
+registerModule({ id: 'stroke', title: 'Nét chữ', icon: '✍️', render(el, A) {
+  const list = A.words();
+  if (!list.length) { el.innerHTML = '<p class="empty">Phạm vi này chưa có từ nào.</p>'; return; }
+  const parts = s => { const r = []; for (const ch of s) { if (/[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/.test(ch) && r.length) r[r.length - 1] += ch; else if (!/[\s\/]/.test(ch)) r.push(ch); } return r; };
+  el.innerHTML = `<div class="row"><select id="sw" style="flex:1"></select><button class="sm" id="rnd">🎲</button></div><div id="sb"></div>`;
+  $('#sw', el).innerHTML = list.map((w, i) => `<option value="${i}">${esc(w.th)} — ${esc(w.vi)}</option>`).join('');
+  let strokes = [], cv, ctx, drawing = null;
+  function load() {
+    const w = list[+$('#sw', el).value]; strokes = [];
+    const size = Math.max(34, Math.min(130, 800 / [...w.th].length));
+    $('#sb', el).innerHTML = `<div style="text-align:center"><div class="th huge">${esc(w.th)} <button class="ico" data-say="${esc(w.th)}">🔊</button></div>${w.rom ? `<div class="rom">${esc(w.rom)}</div>` : ''}<div>${esc(w.vi)}</div></div>
+    <h3>Tách từng ký tự <span class="mut" style="font-weight:400;font-size:13px">(chạm để nghe)</span></h3>
+    <div class="tiles th">${parts(w.th).map(c => `<div class="tile" data-say="${esc(c)}">${esc(/^[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/.test(c) ? '◌' + c : c)}<small>${[...c].map(x => 'U+' + x.codePointAt(0).toString(16).toUpperCase()).join(' ')}</small></div>`).join('')}</div>
+    <h3>Tập viết theo mẫu</h3>
+    <div class="pad"><div class="ghost th" id="gh" style="font-size:${size}px">${esc(w.th)}</div><canvas id="cv"></canvas></div>
+    <div class="ctl"><button id="tg">👁 Ẩn/hiện chữ mẫu</button><button id="un">↶ Hoàn tác</button><button id="cl">🗑 Xóa</button></div>
+    <p class="mut" style="font-size:14px">Mẹo chung: phần lớn phụ âm Thái bắt đầu từ vòng tròn/“đầu chữ” rồi mới kéo nét còn lại; nguyên âm và dấu thanh viết sau cùng. Chữ Thái không có thứ tự nét chuẩn quốc tế như chữ Hán nên đây là bảng tô theo mẫu để luyện tay.</p>`;
+    cv = $('#cv', el); ctx = cv.getContext('2d');
+    const fit = () => { const r = cv.getBoundingClientRect(), d = devicePixelRatio || 1; cv.width = r.width * d; cv.height = r.height * d; ctx.setTransform(d, 0, 0, d, 0, 0); redraw(); };
+    const pt = e => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+    cv.onpointerdown = e => { cv.setPointerCapture(e.pointerId); drawing = [pt(e)]; strokes.push(drawing); redraw(); };
+    cv.onpointermove = e => { if (drawing) { drawing.push(pt(e)); redraw(); } };
+    cv.onpointerup = cv.onpointercancel = () => { drawing = null; };
+    $('#un', el).onclick = () => { strokes.pop(); redraw(); };
+    $('#cl', el).onclick = () => { strokes = []; redraw(); };
+    $('#tg', el).onclick = () => { const g = $('#gh', el); g.style.display = g.style.display === 'none' ? '' : 'none'; };
+    fit();
+  }
+  function redraw() {
+    ctx.clearRect(0, 0, cv.width, cv.height); ctx.lineWidth = 5; ctx.lineCap = ctx.lineJoin = 'round'; ctx.strokeStyle = '#e11d48';
+    for (const s of strokes) { ctx.beginPath(); s.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); if (s.length === 1) ctx.lineTo(s[0].x + .1, s[0].y); ctx.stroke(); }
+  }
+  $('#sw', el).onchange = load;
+  $('#rnd', el).onclick = () => { $('#sw', el).value = Math.random() * list.length | 0; load(); };
+  load();
+} });
+
+/* ===== MODULE 4: DANH SÁCH TỪ ===== */
+registerModule({ id: 'list', title: 'Danh sách', icon: '📚', render(el, A) {
+  el.innerHTML = `<div class="row"><input id="sq" placeholder="Tìm tiếng Thái / Việt / phiên âm…" style="flex:1"></div><div id="ls"></div>`;
+  const draw = () => {
+    const q = $('#sq', el).value.trim().toLowerCase();
+    const l = A.words().filter(w => !q || (w.th + w.vi + w.rom).toLowerCase().includes(q));
+    $('#ls', el).innerHTML = (l.length ? '' : '<p class="empty">Không có kết quả.</p>') + l.map(w => `<div class="item ${A.known(w.id) ? 'k' : ''}"><div class="m"><div class="t th">${esc(w.th)} ${w.rom ? `<span class="rom" style="font-size:14px">${esc(w.rom)}</span>` : ''}</div><div>${esc(w.vi)}</div>${w.ex ? `<small class="mut th">${esc(w.ex)} — ${esc(w.exv)}</small>` : ''}</div><button class="ico" data-say="${esc(w.th)}">🔊</button><button class="sm" data-k="${esc(w.id)}">${A.known(w.id) ? '✓' : '○'}</button></div>`).join('');
+  };
+  $('#sq', el).oninput = draw;
+  el.onclick = e => { const b = e.target.closest('[data-k]'); if (b) { A.setKnown(b.dataset.k, !A.known(b.dataset.k)); draw(); } };
+  draw();
+} });
+
+/* ===== THÊM TỪ VỰNG / BÀI TẬP / TÍNH NĂNG MỚI ===== */
+function splitLine(l, d) { const r = []; let c = '', q = false; for (let i = 0; i < l.length; i++) { const ch = l[i]; if (ch === '"') { if (q && l[i + 1] === '"') { c += '"'; i++; } else q = !q; } else if (ch === d && !q) { r.push(c); c = ''; } else c += ch; } r.push(c); return r; }
+function rowToWord(c, g) {
+  c = c.map(x => String(x ?? '').trim());
+  if (/^(\d+|STT)$/i.test(c[0])) c.shift();
+  const [th, rom, vi, exf] = c;
+  if (!th || !vi || /tiếng thái/i.test(th)) return null;
+  let ex = '', exv = '';
+  if (exf && exf !== '-') { const m = exf.match(/^(.*?)\s*\(([^()]*)\)\s*$/); if (m) { ex = m[1]; exv = m[2]; } else ex = exf; }
+  return { th, rom: rom || '', vi, ex, exv, g };
+}
+function parseText(t, g) {
+  t = t.trim(); if (!t) return [];
+  if (t[0] === '[' || t[0] === '{') {
+    let j = JSON.parse(t); if (!Array.isArray(j)) j = j.words || [];
+    return j.map(o => ({ th: o.th || o.thai, rom: o.rom || '', vi: o.vi || o.viet, ex: o.ex || '', exv: o.exv || '', g })).filter(w => w.th && w.vi);
+  }
+  const lines = t.split(/\r?\n/).filter(x => x.trim()), f = lines[0];
+  const d = f.includes('\t') ? '\t' : f.includes('|') ? '|' : f.includes(';') ? ';' : ',';
+  return lines.map(l => rowToWord(splitLine(l, d), g)).filter(Boolean);
+}
+async function readXlsx(file, g) {
+  if (!window.XLSX) await new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'; s.onload = ok; s.onerror = () => no(new Error('Không tải được thư viện đọc .xlsx (cần Internet). Hãy lưu file thành .csv rồi thử lại.')); document.head.appendChild(s); });
+  const wb = XLSX.read(await file.arrayBuffer());
+  return XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, defval: '' }).map(r => rowToWord(r, g)).filter(Boolean);
+}
+function addWords(ws) {
+  if (!ws.length) return toast('Không đọc được từ nào – kiểm tra lại định dạng');
+  const t = Date.now(); ws.forEach((w, i) => { w.id = 'x' + t + '_' + i; extra.push(w); });
+  store.set('extra', extra); drawScope(); stat(); show(); toast(`Đã thêm ${ws.length} từ`);
+}
+function runPlugin(p) { try { new Function('ThaiApp', p.code)(api); return true; } catch (e) { toast('Lỗi bài tập "' + p.name + '": ' + e.message); return false; } }
+function download(name, text) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' })); a.download = name; a.click(); }
+
+function openMgr() {
+  const d = $('#dlg');
+  d.innerHTML = `<div class="mh"><b>⚙️ Thêm / Quản lý</b><button class="sm" id="mx">✕</button></div>
+  <h3>1. Thêm từ vựng mới</h3>
+  <p class="mut" style="margin:0;font-size:14px">Cột theo thứ tự: (STT) · Tiếng Thái · Phiên âm · Tiếng Việt · Câu ví dụ dạng “Thái (Việt)”. Hỗ trợ .xlsx, .csv, .tsv, .json hoặc dán trực tiếp (ngăn cột bằng Tab).</p>
+  <input id="gn" placeholder="Tên nhóm, vd: Bài 2" value="Bổ sung ${extra.length ? '' : '1'}">
+  <input type="file" id="vf" accept=".xlsx,.csv,.tsv,.txt,.json">
+  <textarea id="vt" rows="4" placeholder="ต่างประเทศ&#9;&#9;nước ngoài&#9;เขาจะไป… (Anh ấy sẽ đi…)"></textarea>
+  <button class="good" id="va">＋ Thêm từ</button>
+  <h3>2. Thêm bài tập / tính năng mới</h3>
+  <p class="mut" style="margin:0;font-size:14px">Dán hoặc chọn file .js gọi <code>ThaiApp.registerModule({id,title,icon,render(el,api){…}})</code>. Bài tập sẽ tự xuất hiện thành tab mới ngay trong file này và được ghi nhớ.</p>
+  <input id="pn" placeholder="Tên bài tập (vd: Ghép cặp)">
+  <input type="file" id="pf" accept=".js,.txt">
+  <textarea id="pc" rows="4" placeholder="ThaiApp.registerModule({id:'demo',title:'Demo',icon:'⭐',render(el,api){el.innerHTML='Xin chào'}})"></textarea>
+  <button class="good" id="pa">＋ Cài bài tập</button>
+  <div id="pl">${plugins.map((p, i) => `<div class="plug"><span>🧩 ${esc(p.name)}</span><button class="sm bad" data-del="${i}">Xóa</button></div>`).join('')}</div>
+  <h3>3. Dữ liệu</h3>
+  <div class="ctl" style="justify-content:flex-start"><button class="sm" id="ex">⬇ Sao lưu (JSON)</button><button class="sm" id="rk">Đặt lại tiến độ “đã thuộc”</button><button class="sm bad" id="rx">Xóa từ đã thêm</button></div>`;
+  d.showModal();
+  $('#mx').onclick = () => d.close();
+  $('#va').onclick = async () => {
+    const g = $('#gn').value.trim() || 'Bổ sung', f = $('#vf').files[0];
+    try {
+      let ws;
+      if (f && /\.xlsx?$/i.test(f.name)) ws = await readXlsx(f, g);
+      else ws = parseText(f ? await f.text() : $('#vt').value, g);
+      addWords(ws); if (ws.length) d.close();
+    } catch (e) { toast(e.message); }
+  };
+  const addPlug = async () => {
+    const f = $('#pf').files[0], code = f ? await f.text() : $('#pc').value;
+    if (!code.trim()) return toast('Chưa có mã bài tập');
+    const p = { name: $('#pn').value.trim() || (f ? f.name : 'Bài tập mới'), code };
+    if (runPlugin(p)) { plugins.push(p); store.set('plugins', plugins); toast('Đã cài: ' + p.name); d.close(); show(); }
+  };
+  $('#pa').onclick = addPlug;
+  $('#pl').onclick = e => { const b = e.target.closest('[data-del]'); if (b) { plugins.splice(+b.dataset.del, 1); store.set('plugins', plugins); toast('Đã xóa – tải lại trang để gỡ hẳn tab'); openMgr(); } };
+  $('#ex').onclick = () => download('thai-backup.json', JSON.stringify({ extra, known, plugins }, null, 1));
+  $('#rk').onclick = () => { known = {}; store.set('known', known); stat(); show(); toast('Đã đặt lại'); };
+  $('#rx').onclick = () => { if (confirm('Xóa toàn bộ từ đã thêm?')) { extra = []; store.set('extra', extra); drawScope(); stat(); show(); d.close(); } };
+}
+$('#mgr').onclick = openMgr;
+
+/* ===== KHỞI ĐỘNG ===== */
+plugins.forEach(runPlugin);
+$('#rate').value = String(rate); if (![...$('#rate').options].some(o => +o.value === rate)) rate = 0.85;
+drawScope(); stat(); ready = true; show();
+</script>
+</body>
+</html>
